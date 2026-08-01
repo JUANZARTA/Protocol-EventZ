@@ -1,0 +1,25 @@
+<div class="space-y-4">
+  <h1 class="text-lg font-semibold">Solicitudes pendientes</h1>
+
+  <p *ngIf="cargando" class="text-sm text-white/40">Cargando…</p>
+  <p *ngIf="!cargando && pendientes.length === 0" class="text-sm text-white/40">No hay solicitudes esperando aprobación.</p>
+
+  <div *ngFor="let usuario of pendientes" class="rounded-xl border border-white/10 bg-zinc-950 p-4">
+    <p class="mb-3 text-sm font-medium">{{ usuario.nombre }}</p>
+    <p class="mb-3 text-xs text-white/40">{{ usuario.email }}</p>
+    <div class="flex gap-2">
+      <button
+        (click)="asignar(usuario, 'jefe_mesero')"
+        class="flex-1 rounded-lg border border-gold-400/40 py-2 text-xs font-medium text-gold-300 hover:bg-gold-400/10"
+      >
+        Jefe de meseros
+      </button>
+      <button
+        (click)="asignar(usuario, 'mesero')"
+        class="flex-1 rounded-lg border border-white/15 py-2 text-xs font-medium text-white/70 hover:bg-white/5"
+      >
+        Mesero
+      </button>
+    </div>
+  </div>
+</div>

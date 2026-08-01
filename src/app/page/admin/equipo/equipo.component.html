@@ -1,0 +1,44 @@
+<div class="space-y-5">
+  <h1 class="text-lg font-semibold">Equipo</h1>
+
+  <div *ngIf="negocio" class="rounded-xl border border-gold-400/30 bg-gold-400/5 p-4">
+    <p class="mb-1 text-xs text-white/50">Código de negocio</p>
+    <div class="flex items-center justify-between">
+      <p class="text-lg font-semibold tracking-widest text-gold-300">{{ negocio.codigo }}</p>
+      <button (click)="regenerarCodigo()" [disabled]="regenerando" class="text-xs text-white/40 underline disabled:opacity-50">
+        {{ regenerando ? 'Generando…' : 'Regenerar' }}
+      </button>
+    </div>
+    <p class="mt-1 text-[11px] text-white/40">Compartilo con tu equipo para que se unan al negocio.</p>
+  </div>
+
+  <p *ngIf="cargando" class="text-sm text-white/40">Cargando…</p>
+
+  <div *ngFor="let usuario of equipo" class="rounded-xl border border-white/10 bg-zinc-950 p-4">
+    <div class="mb-3 flex items-center justify-between">
+      <div>
+        <p class="text-sm font-medium">{{ usuario.nombre }}</p>
+        <p class="text-xs text-white/40">{{ usuario.email }}</p>
+      </div>
+      <app-badge
+        [texto]="usuario.rol === 'administrador' ? 'Administrador' : usuario.rol === 'jefe_mesero' ? 'Jefe de meseros' : 'Mesero'"
+        [tono]="usuario.rol === 'administrador' ? 'dorado' : 'neutro'"
+      />
+    </div>
+
+    <div *ngIf="usuario.uid !== miUid" class="flex gap-2">
+      <select
+        [ngModel]="usuario.rol"
+        (ngModelChange)="cambiarRol(usuario, $event)"
+        class="flex-1 rounded-lg border border-white/15 bg-black px-2 py-1.5 text-xs outline-none focus:border-gold-400"
+      >
+        <option value="mesero">Mesero</option>
+        <option value="jefe_mesero">Jefe de meseros</option>
+        <option value="administrador">Administrador</option>
+      </select>
+      <button (click)="quitarAcceso(usuario)" class="rounded-lg border border-white/15 px-3 text-xs text-white/50 hover:text-red-400">
+        Quitar
+      </button>
+    </div>
+  </div>
+</div>
