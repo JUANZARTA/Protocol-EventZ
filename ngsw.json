@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1785627032476,
+  "timestamp": 1785627311143,
   "index": "/Protocol-EventZ/index.csr.html",
   "assetGroups": [
     {
@@ -12,7 +12,6 @@
       },
       "urls": [
         "/Protocol-EventZ/chunk-26WTOWC6.js",
-        "/Protocol-EventZ/chunk-2F2ZGALH.js",
         "/Protocol-EventZ/chunk-2X3FPPMB.js",
         "/Protocol-EventZ/chunk-3RYDPEGK.js",
         "/Protocol-EventZ/chunk-7AHYJVY3.js",
@@ -26,6 +25,7 @@
         "/Protocol-EventZ/chunk-Q5VM4YPA.js",
         "/Protocol-EventZ/chunk-QAXHRXGU.js",
         "/Protocol-EventZ/chunk-RCABC737.js",
+        "/Protocol-EventZ/chunk-V2DQNFFL.js",
         "/Protocol-EventZ/chunk-VU5RB3RP.js",
         "/Protocol-EventZ/chunk-XGMB56BD.js",
         "/Protocol-EventZ/chunk-XJG2UMMD.js",
@@ -33,10 +33,10 @@
         "/Protocol-EventZ/favicon.ico",
         "/Protocol-EventZ/index.csr.html",
         "/Protocol-EventZ/index.html",
-        "/Protocol-EventZ/main-ZBZL6ZKW.js",
+        "/Protocol-EventZ/main-TH2BGHFR.js",
         "/Protocol-EventZ/manifest.webmanifest",
         "/Protocol-EventZ/polyfills-FFHMD2TL.js",
-        "/Protocol-EventZ/styles-SNO4ZG4M.css"
+        "/Protocol-EventZ/styles-ASICYBPF.css"
       ],
       "patterns": []
     },
@@ -68,7 +68,6 @@
     "/Protocol-EventZ/branding/logo-protocol-eventz-oscuro.png": "63028d77f0a4036351e683773e82f144697ec190",
     "/Protocol-EventZ/branding/logo-protocol-eventz.png": "9374a23fab91b50f77a1a0297abf875ede3cbedc",
     "/Protocol-EventZ/chunk-26WTOWC6.js": "c865383efc2f726e712f6eecf8c9555134379c35",
-    "/Protocol-EventZ/chunk-2F2ZGALH.js": "1182b241723304eb50d9fbb0cafa4af4d4f99987",
     "/Protocol-EventZ/chunk-2X3FPPMB.js": "c2db7883d9e6fd9ea798191fa618f476f896768e",
     "/Protocol-EventZ/chunk-3RYDPEGK.js": "382b35a2f9081daf135415c22fa96e67246d35dc",
     "/Protocol-EventZ/chunk-7AHYJVY3.js": "a9bb5802613fa1115b715077a47ca890f4216bfe",
@@ -82,6 +81,7 @@
     "/Protocol-EventZ/chunk-Q5VM4YPA.js": "071b8db4b75b6cf43f38f66274e0c09ae25bfc17",
     "/Protocol-EventZ/chunk-QAXHRXGU.js": "d8207b4cf89e4daf867e1a8822a8ed1a2bf9e217",
     "/Protocol-EventZ/chunk-RCABC737.js": "d1efb35f243508056170c875232fd90a7c85b3e4",
+    "/Protocol-EventZ/chunk-V2DQNFFL.js": "7b67470cf8f4e39059df9db1a972c5ccbfd1c970",
     "/Protocol-EventZ/chunk-VU5RB3RP.js": "11f31e37f77b5da36463b0a6a8e24f0ef67b3b6c",
     "/Protocol-EventZ/chunk-XGMB56BD.js": "f104383fdf803e7f505950a76485abb291244b2a",
     "/Protocol-EventZ/chunk-XJG2UMMD.js": "89c7cd4ce2cfba644c4b96b41b6432fcc6b3fa65",
@@ -96,12 +96,12 @@
     "/Protocol-EventZ/icons/icon-512x512.png": "1f220d4eb60c7d0014e846d38d5e11ad7d71b9d6",
     "/Protocol-EventZ/icons/icon-72x72.png": "1925614adc75afd5488e8ef4ed1a87c455b2a841",
     "/Protocol-EventZ/icons/icon-96x96.png": "617d031011dc9570053b088134455186840efd0c",
-    "/Protocol-EventZ/index.csr.html": "e5861ae3983435066aefe7fd6147e6914c3f4556",
-    "/Protocol-EventZ/index.html": "454b8b202730e186d2c8e043f2df8afaadb62300",
-    "/Protocol-EventZ/main-ZBZL6ZKW.js": "39d18f98019c1fa43fec139ab4f4594e7886031e",
+    "/Protocol-EventZ/index.csr.html": "c89e096794b82fc7a98e8d3e4fd7e557642f5484",
+    "/Protocol-EventZ/index.html": "31048c3ec308c7ad855dbc6dd8c79689b40f670d",
+    "/Protocol-EventZ/main-TH2BGHFR.js": "625857066fa42c3a136e37fff3507269a44f7082",
     "/Protocol-EventZ/manifest.webmanifest": "2a13550a07a54329290c8df1b76154fa31fcdf4d",
     "/Protocol-EventZ/polyfills-FFHMD2TL.js": "f49b49a155bc7d192db62a4c15d0a612b460a667",
-    "/Protocol-EventZ/styles-SNO4ZG4M.css": "64a7f7e27016a4309eede97776d053bcee1c1d51"
+    "/Protocol-EventZ/styles-ASICYBPF.css": "41b2b8825cbb3183eff3b8935edf5fe8df83fee1"
   },
   "navigationUrls": [
     {
