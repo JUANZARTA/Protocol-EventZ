@@ -6,22 +6,22 @@ import { AuthService } from '../../core/services/auth.service';
   selector: 'app-pendiente',
   standalone: true,
   template: `
-    <div class="flex min-h-screen flex-col items-center justify-center bg-black px-6 text-center text-white">
-      <div class="mb-6 h-14 w-14 animate-pulse rounded-full border-2 border-gold-400"></div>
+    <div class="flex min-h-screen flex-col items-center justify-center bg-white px-6 text-center text-black">
+      <div class="mb-6 h-14 w-14 animate-pulse rounded-full border-2 border-plata-400"></div>
       <h1 class="mb-2 text-lg font-semibold">Solicitud enviada</h1>
-      <p class="max-w-xs text-sm text-white/50">
-        Tu administrador todavía no te asignó un rol. Avisale y volvé a intentar cuando te confirme.
+      <p class="max-w-xs text-sm text-black/50">
+        Tu administrador todavía no te asignó un rol. Avísale y vuelve a intentar cuando te confirme.
       </p>
 
       <button
         (click)="reintentar()"
         [disabled]="cargando"
-        class="mt-8 rounded-full bg-gold-400 px-6 py-2 text-sm font-semibold text-black disabled:opacity-50"
+        class="mt-8 rounded-full bg-black px-6 py-2 text-sm font-semibold text-white disabled:opacity-50"
       >
         {{ cargando ? 'Revisando…' : 'Ya me asignaron el rol' }}
       </button>
 
-      <button (click)="salir()" class="mt-4 text-xs text-white/40 underline">Salir</button>
+      <button (click)="salir()" class="mt-4 text-xs text-black/40 underline">Salir</button>
     </div>
   `,
 })

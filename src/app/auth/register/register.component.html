@@ -1,22 +1,22 @@
-<div class="flex min-h-screen flex-col justify-center bg-black px-6 py-10 text-white">
+<div class="flex min-h-screen flex-col justify-center bg-white px-6 py-10 text-black">
   <div class="mx-auto w-full max-w-sm">
     <div class="mb-8 text-center">
-      <p class="text-xs uppercase tracking-[0.3em] text-gold-400">Protocol</p>
+      <p class="text-xs uppercase tracking-[0.3em] text-plata-600">Protocol</p>
       <h1 class="text-2xl font-semibold tracking-tight">Crear cuenta</h1>
     </div>
 
-    <div class="mb-6 flex rounded-lg border border-white/10 p-1 text-sm">
+    <div class="mb-6 flex rounded-lg border border-plata-200 p-1 text-sm">
       <button
         (click)="cambiarModo('negocio')"
         class="flex-1 rounded-md py-2 transition"
-        [ngClass]="modo === 'negocio' ? 'bg-gold-400 text-black' : 'text-white/60'"
+        [ngClass]="modo === 'negocio' ? 'bg-black text-white' : 'text-black/60'"
       >
         Crear negocio
       </button>
       <button
         (click)="cambiarModo('empleado')"
         class="flex-1 rounded-md py-2 transition"
-        [ngClass]="modo === 'empleado' ? 'bg-gold-400 text-black' : 'text-white/60'"
+        [ngClass]="modo === 'empleado' ? 'bg-black text-white' : 'text-black/60'"
       >
         Soy empleado
       </button>
@@ -25,59 +25,59 @@
     <!-- Crear negocio: este usuario queda como administrador -->
     <form *ngIf="modo === 'negocio'" [formGroup]="formNegocio" (ngSubmit)="enviarNegocio()" class="space-y-4">
       <div>
-        <label class="mb-1 block text-xs text-white/50">Tu nombre</label>
-        <input formControlName="nombre" class="w-full rounded-lg border border-white/15 bg-zinc-950 px-3 py-2.5 text-sm outline-none focus:border-gold-400" />
+        <label class="mb-1 block text-xs text-black/50">Tu nombre</label>
+        <input formControlName="nombre" class="w-full rounded-lg border border-plata-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-plata-500" />
       </div>
       <div>
-        <label class="mb-1 block text-xs text-white/50">Nombre del negocio</label>
-        <input formControlName="nombreNegocio" class="w-full rounded-lg border border-white/15 bg-zinc-950 px-3 py-2.5 text-sm outline-none focus:border-gold-400" />
+        <label class="mb-1 block text-xs text-black/50">Nombre del negocio</label>
+        <input formControlName="nombreNegocio" class="w-full rounded-lg border border-plata-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-plata-500" />
       </div>
       <div>
-        <label class="mb-1 block text-xs text-white/50">Correo</label>
-        <input type="email" formControlName="email" class="w-full rounded-lg border border-white/15 bg-zinc-950 px-3 py-2.5 text-sm outline-none focus:border-gold-400" />
+        <label class="mb-1 block text-xs text-black/50">Correo</label>
+        <input type="email" formControlName="email" class="w-full rounded-lg border border-plata-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-plata-500" />
       </div>
       <div>
-        <label class="mb-1 block text-xs text-white/50">Contraseña</label>
-        <input type="password" formControlName="password" class="w-full rounded-lg border border-white/15 bg-zinc-950 px-3 py-2.5 text-sm outline-none focus:border-gold-400" />
+        <label class="mb-1 block text-xs text-black/50">Contraseña</label>
+        <input type="password" formControlName="password" class="w-full rounded-lg border border-plata-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-plata-500" />
       </div>
 
-      <p *ngIf="error" class="text-sm text-red-400">{{ error }}</p>
+      <p *ngIf="error" class="text-sm text-red-600">{{ error }}</p>
 
-      <button type="submit" [disabled]="cargando" class="w-full rounded-lg bg-gold-400 py-2.5 text-sm font-semibold text-black transition hover:bg-gold-300 disabled:opacity-50">
+      <button type="submit" [disabled]="cargando" class="w-full rounded-lg bg-black py-2.5 text-sm font-semibold text-white transition hover:bg-plata-800 disabled:opacity-50">
         {{ cargando ? 'Creando…' : 'Crear negocio' }}
       </button>
-      <p class="text-center text-[11px] text-white/40">Vas a quedar como administrador y te va a generar un código para invitar a tu equipo.</p>
+      <p class="text-center text-[11px] text-black/40">Vas a quedar como administrador y te va a generar un código para invitar a tu equipo.</p>
     </form>
 
     <!-- Ingresar como empleado: pendiente hasta que el administrador asigne el rol -->
     <form *ngIf="modo === 'empleado'" [formGroup]="formEmpleado" (ngSubmit)="enviarEmpleado()" class="space-y-4">
       <div>
-        <label class="mb-1 block text-xs text-white/50">Tu nombre</label>
-        <input formControlName="nombre" class="w-full rounded-lg border border-white/15 bg-zinc-950 px-3 py-2.5 text-sm outline-none focus:border-gold-400" />
+        <label class="mb-1 block text-xs text-black/50">Tu nombre</label>
+        <input formControlName="nombre" class="w-full rounded-lg border border-plata-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-plata-500" />
       </div>
       <div>
-        <label class="mb-1 block text-xs text-white/50">Código de negocio</label>
-        <input formControlName="codigo" class="w-full rounded-lg border border-white/15 bg-zinc-950 px-3 py-2.5 text-sm uppercase tracking-widest outline-none focus:border-gold-400" />
+        <label class="mb-1 block text-xs text-black/50">Código de negocio</label>
+        <input formControlName="codigo" class="w-full rounded-lg border border-plata-300 bg-white px-3 py-2.5 text-sm uppercase tracking-widest outline-none focus:border-plata-500" />
       </div>
       <div>
-        <label class="mb-1 block text-xs text-white/50">Correo</label>
-        <input type="email" formControlName="email" class="w-full rounded-lg border border-white/15 bg-zinc-950 px-3 py-2.5 text-sm outline-none focus:border-gold-400" />
+        <label class="mb-1 block text-xs text-black/50">Correo</label>
+        <input type="email" formControlName="email" class="w-full rounded-lg border border-plata-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-plata-500" />
       </div>
       <div>
-        <label class="mb-1 block text-xs text-white/50">Contraseña</label>
-        <input type="password" formControlName="password" class="w-full rounded-lg border border-white/15 bg-zinc-950 px-3 py-2.5 text-sm outline-none focus:border-gold-400" />
+        <label class="mb-1 block text-xs text-black/50">Contraseña</label>
+        <input type="password" formControlName="password" class="w-full rounded-lg border border-plata-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-plata-500" />
       </div>
 
-      <p *ngIf="error" class="text-sm text-red-400">{{ error }}</p>
+      <p *ngIf="error" class="text-sm text-red-600">{{ error }}</p>
 
-      <button type="submit" [disabled]="cargando" class="w-full rounded-lg bg-gold-400 py-2.5 text-sm font-semibold text-black transition hover:bg-gold-300 disabled:opacity-50">
+      <button type="submit" [disabled]="cargando" class="w-full rounded-lg bg-black py-2.5 text-sm font-semibold text-white transition hover:bg-plata-800 disabled:opacity-50">
         {{ cargando ? 'Enviando…' : 'Unirme al negocio' }}
       </button>
-      <p class="text-center text-[11px] text-white/40">Tu administrador te va a asignar un rol antes de que puedas entrar.</p>
+      <p class="text-center text-[11px] text-black/40">Tu administrador te va a asignar un rol antes de que puedas entrar.</p>
     </form>
 
-    <p class="mt-6 text-center text-sm text-white/50">
-      ¿Ya tenés cuenta? <a routerLink="/login" class="text-gold-400 hover:underline">Ingresá</a>
+    <p class="mt-6 text-center text-sm text-black/50">
+      ¿Ya tienes cuenta? <a routerLink="/login" class="text-plata-700 hover:underline">Ingresa</a>
     </p>
   </div>
 </div>

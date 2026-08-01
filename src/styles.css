@@ -8,8 +8,8 @@ html, body {
 
 body {
   margin: 0;
-  background-color: #0a0a0a;
-  color: #f5f5f5;
+  background-color: #ffffff;
+  color: #111111;
   font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
   -webkit-tap-highlight-color: transparent;
 }
@@ -19,6 +19,6 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #D4AF37;
+  background-color: #AEB2BB;
   border-radius: 999px;
 }

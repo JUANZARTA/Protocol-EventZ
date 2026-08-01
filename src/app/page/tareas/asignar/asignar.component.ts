@@ -6,13 +6,14 @@ import { TaskService, CargaMesero } from '../../../core/services/task.service';
 import { EventService } from '../../../core/services/event.service';
 import { Evento, Participante, Tarea } from '../../../core/models/dominio.models';
 import { BadgeComponent } from '../../../shared/components/badge/badge.component';
+import { ModalComponent } from '../../../shared/components/modal/modal.component';
 
 type Modo = 'tarea' | 'mesero';
 
 @Component({
   selector: 'app-asignar',
   standalone: true,
-  imports: [CommonModule, FormsModule, BadgeComponent],
+  imports: [CommonModule, FormsModule, BadgeComponent, ModalComponent],
   templateUrl: './asignar.component.html',
 })
 export default class AsignarComponent implements OnInit {
@@ -22,10 +23,13 @@ export default class AsignarComponent implements OnInit {
   cargas: CargaMesero[] = [];
   cargando = true;
 
-  modo: Modo = 'tarea';
+  modo: Modo = 'mesero';
   meseroSeleccionado: string | null = null;
   seleccionadas = new Set<string>();
   asignando = false;
+
+  modalDesasignarAbierto = false;
+  desasignando = false;
 
   constructor(private taskService: TaskService, private eventService: EventService) {}
 
@@ -35,6 +39,10 @@ export default class AsignarComponent implements OnInit {
 
   get sinAsignar(): Tarea[] {
     return this.tareas.filter((t) => !t.asignadoA);
+  }
+
+  get asignadas(): Tarea[] {
+    return this.tareas.filter((t) => !!t.asignadoA);
   }
 
   cambiarModo(modo: Modo): void {
@@ -68,6 +76,21 @@ export default class AsignarComponent implements OnInit {
     ).subscribe(() => {
       this.asignando = false;
       this.seleccionadas.clear();
+      this.cargar();
+    });
+  }
+
+  /** Desliga TODAS las tareas del evento de sus meseros. No hay forma de deshacerlo. */
+  desasignarTodas(): void {
+    if (!this.evento || this.asignadas.length === 0) return;
+    const eventoId = this.evento.id;
+
+    this.desasignando = true;
+    forkJoin(
+      this.asignadas.map((t) => this.taskService.asignar(eventoId, t.id, null, t.tipo))
+    ).subscribe(() => {
+      this.desasignando = false;
+      this.modalDesasignarAbierto = false;
       this.cargar();
     });
   }

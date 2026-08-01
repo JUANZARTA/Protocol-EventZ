@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-export type TonoBadge = 'neutro' | 'dorado' | 'ok' | 'alerta';
+export type TonoBadge = 'neutro' | 'plata' | 'ok' | 'alerta';
 
 const CLASES: Record<TonoBadge, string> = {
-  neutro: 'bg-white/10 text-white/70',
-  dorado: 'bg-gold-400/15 text-gold-300 border border-gold-400/30',
-  ok: 'bg-emerald-500/15 text-emerald-300',
-  alerta: 'bg-red-500/15 text-red-300',
+  neutro: 'bg-black/5 text-black/60',
+  plata: 'bg-plata-100 text-plata-700 border border-plata-300',
+  ok: 'bg-emerald-50 text-emerald-700',
+  alerta: 'bg-red-50 text-red-600',
 };
 
 @Component({

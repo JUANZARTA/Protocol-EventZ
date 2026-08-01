@@ -6,14 +6,14 @@ import { AuthService } from '../../../core/services/auth.service';
   selector: 'app-header',
   standalone: true,
   template: `
-    <header class="sticky top-0 z-10 flex items-center justify-between border-b border-white/10 bg-black/90 px-4 py-3 backdrop-blur">
+    <header class="sticky top-0 z-10 flex items-center justify-between border-b border-plata-200 bg-white/90 px-4 py-3 backdrop-blur">
       <div class="flex flex-col leading-tight">
-        <span class="text-xs uppercase tracking-widest text-gold-400">Protocol EventZ</span>
-        <span class="text-sm text-white/70">{{ nombre }}</span>
+        <span class="text-xs uppercase tracking-widest text-plata-600">Protocol EventZ</span>
+        <span class="text-sm text-black/70">{{ nombre }}</span>
       </div>
       <button
         (click)="salir()"
-        class="rounded-full border border-gold-400/40 px-3 py-1 text-xs text-gold-300 transition hover:bg-gold-400/10"
+        class="rounded-full border border-plata-300 px-3 py-1 text-xs text-plata-700 transition hover:bg-plata-50"
       >
         Salir
       </button>

@@ -1,45 +1,45 @@
 <div class="space-y-5">
   <h1 class="text-lg font-semibold">Equipo</h1>
 
-  <div *ngIf="negocio" class="rounded-xl border border-gold-400/30 bg-gold-400/5 p-4">
-    <p class="mb-1 text-xs text-white/50">Código de negocio</p>
+  <div *ngIf="negocio" class="rounded-xl border border-plata-300 bg-plata-50 p-4">
+    <p class="mb-1 text-xs text-black/50">Código de negocio</p>
     <div class="flex items-center justify-between">
-      <p class="text-lg font-semibold tracking-widest text-gold-300">{{ negocio.codigo }}</p>
-      <button (click)="regenerarCodigo()" [disabled]="regenerando" class="text-xs text-white/40 underline disabled:opacity-50">
+      <p class="text-lg font-semibold tracking-widest text-plata-700">{{ negocio.codigo }}</p>
+      <button (click)="regenerarCodigo()" [disabled]="regenerando" class="text-xs text-black/40 underline disabled:opacity-50">
         {{ regenerando ? 'Generando…' : 'Regenerar' }}
       </button>
     </div>
-    <p class="mt-1 text-[11px] text-white/40">Compartilo con tu equipo para que se unan al negocio.</p>
+    <p class="mt-1 text-[11px] text-black/40">Compártelo con tu equipo para que se unan al negocio.</p>
 
-    <div class="mt-4 flex items-center justify-between border-t border-white/10 pt-3">
+    <div class="mt-4 flex items-center justify-between border-t border-plata-200 pt-3">
       <div>
-        <p class="text-xs font-medium text-white/80">Aprobación automática</p>
-        <p class="text-[11px] text-white/40">Quien entra con el código queda activo como mesero, sin esperarte.</p>
+        <p class="text-xs font-medium text-black/80">Aprobación automática</p>
+        <p class="text-[11px] text-black/40">Quien entra con el código queda activo como mesero, sin esperarte.</p>
       </div>
       <button
         (click)="toggleAprobacionAutomatica()"
         class="relative h-6 w-11 shrink-0 rounded-full transition"
-        [ngClass]="negocio.aprobacionAutomatica ? 'bg-gold-400' : 'bg-white/15'"
+        [ngClass]="negocio.aprobacionAutomatica ? 'bg-plata-600' : 'bg-black/10'"
       >
         <span
-          class="absolute top-0.5 h-5 w-5 rounded-full bg-black transition-all"
+          class="absolute top-0.5 h-5 w-5 rounded-full bg-white transition-all"
           [ngClass]="negocio.aprobacionAutomatica ? 'left-5' : 'left-0.5'"
         ></span>
       </button>
     </div>
   </div>
 
-  <p *ngIf="cargando" class="text-sm text-white/40">Cargando…</p>
+  <p *ngIf="cargando" class="text-sm text-black/40">Cargando…</p>
 
-  <div *ngFor="let usuario of equipo" class="rounded-xl border border-white/10 bg-zinc-950 p-4">
+  <div *ngFor="let usuario of equipo" class="rounded-xl border border-plata-200 bg-white p-4">
     <div class="mb-3 flex items-center justify-between">
       <div>
         <p class="text-sm font-medium">{{ usuario.nombre }}</p>
-        <p class="text-xs text-white/40">{{ usuario.email }}</p>
+        <p class="text-xs text-black/40">{{ usuario.email }}</p>
       </div>
       <app-badge
         [texto]="usuario.rol === 'administrador' ? 'Administrador' : usuario.rol === 'jefe_mesero' ? 'Jefe de meseros' : 'Mesero'"
-        [tono]="usuario.rol === 'administrador' ? 'dorado' : 'neutro'"
+        [tono]="usuario.rol === 'administrador' ? 'plata' : 'neutro'"
       />
     </div>
 
@@ -47,13 +47,13 @@
       <select
         [ngModel]="usuario.rol"
         (ngModelChange)="cambiarRol(usuario, $event)"
-        class="flex-1 rounded-lg border border-white/15 bg-black px-2 py-1.5 text-xs outline-none focus:border-gold-400"
+        class="flex-1 rounded-lg border border-plata-300 bg-white px-2 py-1.5 text-xs outline-none focus:border-plata-500"
       >
         <option value="mesero">Mesero</option>
         <option value="jefe_mesero">Jefe de meseros</option>
         <option value="administrador">Administrador</option>
       </select>
-      <button (click)="quitarAcceso(usuario)" class="rounded-lg border border-white/15 px-3 text-xs text-white/50 hover:text-red-400">
+      <button (click)="quitarAcceso(usuario)" class="rounded-lg border border-plata-300 px-3 text-xs text-black/50 hover:text-red-600">
         Quitar
       </button>
     </div>

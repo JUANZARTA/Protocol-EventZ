@@ -272,7 +272,7 @@ export class AuthService {
       case 'WEAK_PASSWORD : Password should be at least 6 characters':
         return 'La contraseña debe tener al menos 6 caracteres.';
       default:
-        return 'Ocurrió un error inesperado. Intentá de nuevo.';
+        return 'Ocurrió un error inesperado. Intenta de nuevo.';
     }
   }
 

@@ -92,7 +92,7 @@ export default class EventosComponent implements OnInit {
       case 'programado':
         return { texto: 'Programado', tono: 'neutro' };
       case 'en_curso':
-        return { texto: 'En curso', tono: 'dorado' };
+        return { texto: 'En curso', tono: 'plata' };
       case 'finalizado':
         return { texto: 'Finalizado', tono: 'ok' };
       default:
