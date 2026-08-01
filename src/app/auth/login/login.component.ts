@@ -24,6 +24,15 @@ export default class LoginComponent implements OnInit {
     return typeof navigator !== 'undefined' && /iPhone|iPad|iPod/i.test(navigator.userAgent);
   }
 
+  get isAndroid(): boolean {
+    return typeof navigator !== 'undefined' && /Android/i.test(navigator.userAgent);
+  }
+
+  /** Chrome en Android a veces tarda o directamente no dispara el prompt nativo. */
+  get mostrarAyudaGenerica(): boolean {
+    return !this.appInstalled && !this.isIos && !this.canInstallApp;
+  }
+
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],

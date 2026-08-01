@@ -48,8 +48,16 @@
       </button>
     </div>
 
-    <div *ngIf="isIos && !appInstalled" class="mt-8 rounded-lg border border-plata-200 p-3 text-center text-xs text-black/50">
-      En iPhone: toca <strong>Compartir</strong> y luego <strong>"Agregar a inicio"</strong> para instalar la app.
+    <div *ngIf="isIos && !appInstalled" class="mt-8 rounded-lg border border-plata-200 p-3 text-center text-xs text-black/60">
+      <p class="mb-1 font-medium text-black/80">Para instalarla en iPhone</p>
+      Tocá el botón <strong>Compartir</strong> (el cuadrado con la flecha, abajo del navegador) y elegí
+      <strong>"Agregar a inicio"</strong>.
+    </div>
+
+    <div *ngIf="mostrarAyudaGenerica" class="mt-8 rounded-lg border border-plata-200 p-3 text-center text-xs text-black/60">
+      <p class="mb-1 font-medium text-black/80">Para instalarla en tu teléfono</p>
+      <span *ngIf="isAndroid">Abrí el menú del navegador (⋮ arriba a la derecha) y elegí <strong>"Instalar app"</strong> o <strong>"Agregar a pantalla de inicio"</strong>.</span>
+      <span *ngIf="!isAndroid">Abrí el menú de tu navegador y buscá la opción <strong>"Instalar app"</strong> o <strong>"Agregar a pantalla de inicio"</strong>.</span>
     </div>
   </div>
 </div>
