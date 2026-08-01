@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { forkJoin } from 'rxjs';
 import { TaskService, CargaMesero } from '../../../core/services/task.service';
 import { EventService } from '../../../core/services/event.service';
 import { Evento, Participante, Tarea } from '../../../core/models/dominio.models';
 import { BadgeComponent } from '../../../shared/components/badge/badge.component';
+
+type Modo = 'tarea' | 'mesero';
 
 @Component({
   selector: 'app-asignar',
@@ -19,6 +22,11 @@ export default class AsignarComponent implements OnInit {
   cargas: CargaMesero[] = [];
   cargando = true;
 
+  modo: Modo = 'tarea';
+  meseroSeleccionado: string | null = null;
+  seleccionadas = new Set<string>();
+  asignando = false;
+
   constructor(private taskService: TaskService, private eventService: EventService) {}
 
   ngOnInit(): void {
@@ -27,6 +35,41 @@ export default class AsignarComponent implements OnInit {
 
   get sinAsignar(): Tarea[] {
     return this.tareas.filter((t) => !t.asignadoA);
+  }
+
+  cambiarModo(modo: Modo): void {
+    this.modo = modo;
+    this.meseroSeleccionado = null;
+    this.seleccionadas.clear();
+  }
+
+  elegirMesero(uid: string): void {
+    this.meseroSeleccionado = this.meseroSeleccionado === uid ? null : uid;
+    this.seleccionadas.clear();
+  }
+
+  estaSeleccionada(tareaId: string): boolean {
+    return this.seleccionadas.has(tareaId);
+  }
+
+  toggleSeleccion(tareaId: string): void {
+    if (this.seleccionadas.has(tareaId)) this.seleccionadas.delete(tareaId);
+    else this.seleccionadas.add(tareaId);
+  }
+
+  asignarSeleccionadas(): void {
+    if (!this.evento || !this.meseroSeleccionado || this.seleccionadas.size === 0) return;
+    const uid = this.meseroSeleccionado;
+    const tareasAAsignar = this.sinAsignar.filter((t) => this.seleccionadas.has(t.id));
+
+    this.asignando = true;
+    forkJoin(
+      tareasAAsignar.map((t) => this.taskService.asignar(this.evento!.id, t.id, uid, t.tipo))
+    ).subscribe(() => {
+      this.asignando = false;
+      this.seleccionadas.clear();
+      this.cargar();
+    });
   }
 
   cargar(): void {

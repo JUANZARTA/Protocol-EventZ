@@ -23,7 +23,25 @@
       <p *ngIf="participantes.length === 0" class="text-sm text-white/40">Nadie se marcó disponible todavía.</p>
     </div>
 
-    <div>
+    <div class="flex rounded-lg border border-white/10 p-1 text-sm">
+      <button
+        (click)="cambiarModo('tarea')"
+        class="flex-1 rounded-md py-1.5 transition"
+        [ngClass]="modo === 'tarea' ? 'bg-gold-400 text-black' : 'text-white/60'"
+      >
+        Por tarea
+      </button>
+      <button
+        (click)="cambiarModo('mesero')"
+        class="flex-1 rounded-md py-1.5 transition"
+        [ngClass]="modo === 'mesero' ? 'bg-gold-400 text-black' : 'text-white/60'"
+      >
+        Mi equipo
+      </button>
+    </div>
+
+    <!-- Por tarea: elegís, por cada tarea, a quién se la asignás -->
+    <div *ngIf="modo === 'tarea'">
       <p class="mb-2 text-xs uppercase tracking-wide text-white/40">Tareas</p>
       <div *ngFor="let tarea of tareas" class="mb-2 rounded-xl border border-white/10 bg-zinc-950 p-3">
         <div class="mb-2 flex items-center justify-between">
@@ -42,6 +60,46 @@
           <option *ngFor="let p of participantes" [ngValue]="p.uid">{{ p.nombre }}</option>
         </select>
       </div>
+    </div>
+
+    <!-- Mi equipo: elegís un mesero y le tildás todas las tareas sin asignar que quieras darle -->
+    <div *ngIf="modo === 'mesero'">
+      <p class="mb-2 text-xs uppercase tracking-wide text-white/40">Elegí un mesero</p>
+      <div class="mb-4 flex flex-wrap gap-2">
+        <button
+          *ngFor="let p of participantes"
+          (click)="elegirMesero(p.uid)"
+          class="rounded-full border px-3 py-1.5 text-xs font-medium transition"
+          [ngClass]="meseroSeleccionado === p.uid ? 'border-gold-400 bg-gold-400/10 text-gold-300' : 'border-white/15 text-white/60'"
+        >
+          {{ p.nombre }}
+        </button>
+        <p *ngIf="participantes.length === 0" class="text-sm text-white/40">Nadie se marcó disponible todavía.</p>
+      </div>
+
+      <ng-container *ngIf="meseroSeleccionado">
+        <p *ngIf="sinAsignar.length === 0" class="text-sm text-white/40">No quedan tareas sin asignar.</p>
+
+        <div *ngFor="let tarea of sinAsignar" (click)="toggleSeleccion(tarea.id)" class="mb-2 flex items-center gap-3 rounded-xl border border-white/10 bg-zinc-950 p-3">
+          <div
+            class="flex h-5 w-5 shrink-0 items-center justify-center rounded border text-[10px]"
+            [ngClass]="estaSeleccionada(tarea.id) ? 'bg-gold-400 border-gold-400 text-black' : 'border-white/25'"
+          >
+            {{ estaSeleccionada(tarea.id) ? '✓' : '' }}
+          </div>
+          <p class="flex-1 text-sm">{{ tarea.titulo }}</p>
+          <app-badge [texto]="tarea.tipo" tono="neutro" />
+        </div>
+
+        <button
+          *ngIf="sinAsignar.length > 0"
+          (click)="asignarSeleccionadas()"
+          [disabled]="seleccionadas.size === 0 || asignando"
+          class="mt-2 w-full rounded-lg bg-gold-400 py-2.5 text-sm font-semibold text-black disabled:opacity-40"
+        >
+          {{ asignando ? 'Asignando…' : 'Asignar ' + seleccionadas.size + ' tarea(s)' }}
+        </button>
+      </ng-container>
     </div>
   </ng-container>
 </div>
