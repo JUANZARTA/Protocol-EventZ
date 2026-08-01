@@ -17,6 +17,8 @@ export interface Negocio {
   codigo: string;
   duenoUid: string;
   creadoEn: number;
+  /** Si está activo, quien entra como empleado con el código queda "mesero" activo sin esperar aprobación. */
+  aprobacionAutomatica: boolean;
 }
 
 export type EstadoEvento = 'programado' | 'en_curso' | 'finalizado';

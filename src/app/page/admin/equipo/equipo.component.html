@@ -10,6 +10,23 @@
       </button>
     </div>
     <p class="mt-1 text-[11px] text-white/40">Compartilo con tu equipo para que se unan al negocio.</p>
+
+    <div class="mt-4 flex items-center justify-between border-t border-white/10 pt-3">
+      <div>
+        <p class="text-xs font-medium text-white/80">Aprobación automática</p>
+        <p class="text-[11px] text-white/40">Quien entra con el código queda activo como mesero, sin esperarte.</p>
+      </div>
+      <button
+        (click)="toggleAprobacionAutomatica()"
+        class="relative h-6 w-11 shrink-0 rounded-full transition"
+        [ngClass]="negocio.aprobacionAutomatica ? 'bg-gold-400' : 'bg-white/15'"
+      >
+        <span
+          class="absolute top-0.5 h-5 w-5 rounded-full bg-black transition-all"
+          [ngClass]="negocio.aprobacionAutomatica ? 'left-5' : 'left-0.5'"
+        ></span>
+      </button>
+    </div>
   </div>
 
   <p *ngIf="cargando" class="text-sm text-white/40">Cargando…</p>

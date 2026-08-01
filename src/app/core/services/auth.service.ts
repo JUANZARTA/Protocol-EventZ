@@ -82,6 +82,7 @@ export class AuthService {
           codigo,
           duenoUid: auth.localId,
           creadoEn: ahora,
+          aprobacionAutomatica: false,
         });
 
         const altaUsuario$ = this.putConToken(`venues/${venueId}/usuarios/${auth.localId}`, auth.idToken, {
@@ -129,38 +130,54 @@ export class AuthService {
     );
   }
 
+  /** Lectura pública acotada a este único campo (ver database.rules.json). */
+  private leerAprobacionAutomatica(venueId: string): Observable<boolean> {
+    const url = `${this.dbUrl}/venues/${venueId}/info/aprobacionAutomatica.json`;
+    return this.http.get<boolean | null>(url).pipe(
+      map((valor) => valor === true),
+      catchError(() => of(false))
+    );
+  }
+
   registrarComoEmpleado(nombre: string, codigo: string, email: string, password: string): Observable<Sesion> {
     return this.validarCodigoNegocio(codigo).pipe(
       switchMap((venueId) => {
         if (!venueId) return throwError(() => 'El código de negocio no es válido.');
 
-        return this.signUp(email, password).pipe(
-          switchMap((auth) => {
-            const ahora = Date.now();
-            const altaUsuario$ = this.putConToken(`venues/${venueId}/usuarios/${auth.localId}`, auth.idToken, {
-              nombre,
-              email,
-              rol: null,
-              estado: 'pendiente',
-              creadoEn: ahora,
-            });
-            const altaIndice$ = this.putConToken(`usuarios_index/${auth.localId}`, auth.idToken, { venueId });
+        return this.leerAprobacionAutomatica(venueId).pipe(
+          switchMap((aprobacionAutomatica) => {
+            const rol: Rol | null = aprobacionAutomatica ? 'mesero' : null;
+            const estado = aprobacionAutomatica ? 'activo' : 'pendiente';
 
-            return altaUsuario$.pipe(
-              switchMap(() => altaIndice$),
-              map(() => {
-                const sesion: Sesion = {
-                  idToken: auth.idToken,
-                  refreshToken: auth.refreshToken,
-                  localId: auth.localId,
-                  email,
+            return this.signUp(email, password).pipe(
+              switchMap((auth) => {
+                const ahora = Date.now();
+                const altaUsuario$ = this.putConToken(`venues/${venueId}/usuarios/${auth.localId}`, auth.idToken, {
                   nombre,
-                  venueId,
-                  rol: null,
-                  estado: 'pendiente',
-                };
-                this.guardarSesion(sesion);
-                return sesion;
+                  email,
+                  rol,
+                  estado,
+                  creadoEn: ahora,
+                });
+                const altaIndice$ = this.putConToken(`usuarios_index/${auth.localId}`, auth.idToken, { venueId });
+
+                return altaUsuario$.pipe(
+                  switchMap(() => altaIndice$),
+                  map(() => {
+                    const sesion: Sesion = {
+                      idToken: auth.idToken,
+                      refreshToken: auth.refreshToken,
+                      localId: auth.localId,
+                      email,
+                      nombre,
+                      venueId,
+                      rol,
+                      estado,
+                    };
+                    this.guardarSesion(sesion);
+                    return sesion;
+                  })
+                );
               })
             );
           })

@@ -57,4 +57,11 @@ export default class EquipoComponent implements OnInit {
       this.regenerando = false;
     });
   }
+
+  toggleAprobacionAutomatica(): void {
+    if (!this.negocio) return;
+    const nuevoValor = !this.negocio.aprobacionAutomatica;
+    this.negocio = { ...this.negocio, aprobacionAutomatica: nuevoValor };
+    this.venueService.actualizarAprobacionAutomatica(nuevoValor).subscribe();
+  }
 }

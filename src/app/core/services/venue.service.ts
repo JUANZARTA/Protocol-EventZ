@@ -31,6 +31,10 @@ export class VenueService {
     );
   }
 
+  actualizarAprobacionAutomatica(valor: boolean): Observable<unknown> {
+    return this.rtdb.patch(`venues/${this.venueId}/info`, { aprobacionAutomatica: valor });
+  }
+
   private generarCodigo(): string {
     const alfabeto = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
     let codigo = '';

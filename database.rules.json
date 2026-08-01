@@ -8,12 +8,16 @@
         ".read": "auth != null && root.child('venues').child($venueId).child('usuarios').child(auth.uid).exists()",
 
         "info": {
-          ".write": "auth != null && ((!data.exists() && newData.child('duenoUid').val() === auth.uid) || root.child('venues').child($venueId).child('usuarios').child(auth.uid).child('rol').val() === 'administrador')"
+          ".write": "auth != null && ((!data.exists() && newData.child('duenoUid').val() === auth.uid) || root.child('venues').child($venueId).child('usuarios').child(auth.uid).child('rol').val() === 'administrador')",
+
+          "aprobacionAutomatica": {
+            ".read": true
+          }
         },
 
         "usuarios": {
           "$uid": {
-            ".write": "auth != null && (((!data.exists()) && (((newData.child('rol').val() === null) && (newData.child('estado').val() === 'pendiente')) || ((newData.child('rol').val() === 'administrador') && (root.child('venues').child($venueId).child('info').child('duenoUid').val() === auth.uid)))) || (root.child('venues').child($venueId).child('usuarios').child(auth.uid).child('rol').val() === 'administrador'))"
+            ".write": "auth != null && (((!data.exists()) && (((newData.child('rol').val() === null) && (newData.child('estado').val() === 'pendiente')) || ((newData.child('rol').val() === 'administrador') && (root.child('venues').child($venueId).child('info').child('duenoUid').val() === auth.uid)) || ((newData.child('rol').val() === 'mesero') && (newData.child('estado').val() === 'activo') && (root.child('venues').child($venueId).child('info').child('aprobacionAutomatica').val() === true)))) || (root.child('venues').child($venueId).child('usuarios').child(auth.uid).child('rol').val() === 'administrador'))"
           }
         },
 
