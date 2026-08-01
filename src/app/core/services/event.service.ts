@@ -16,8 +16,16 @@ export class EventService {
 
   listar(): Observable<Evento[]> {
     return this.rtdb
-      .get<Record<string, Omit<Evento, 'id'>>>(`venues/${this.venueId}/eventos`)
-      .pipe(map((obj) => RtdbService.toArray(obj).sort((a, b) => b.fecha.localeCompare(a.fecha))));
+      .get<Record<string, { info: Omit<Evento, 'id'> }>>(`venues/${this.venueId}/eventos`)
+      .pipe(
+        map((obj) => {
+          if (!obj) return [];
+          return Object.entries(obj)
+            .filter(([, value]) => !!value?.info)
+            .map(([id, value]) => ({ ...value.info, id }))
+            .sort((a, b) => b.fecha.localeCompare(a.fecha));
+        })
+      );
   }
 
   obtener(eventoId: string): Observable<Evento> {
@@ -41,6 +49,11 @@ export class EventService {
 
   finalizar(eventoId: string): Observable<unknown> {
     return this.rtdb.patch(`venues/${this.venueId}/eventos/${eventoId}/info`, { estado: 'finalizado' });
+  }
+
+  /** Deshace un "Finalizar" hecho por error. */
+  reactivar(eventoId: string): Observable<unknown> {
+    return this.rtdb.patch(`venues/${this.venueId}/eventos/${eventoId}/info`, { estado: 'programado' });
   }
 
   listarParticipantes(eventoId: string): Observable<Participante[]> {

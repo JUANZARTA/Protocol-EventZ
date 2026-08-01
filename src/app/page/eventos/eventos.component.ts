@@ -83,6 +83,10 @@ export default class EventosComponent implements OnInit {
     this.eventService.finalizar(evento.id).subscribe(() => this.cargar());
   }
 
+  reactivar(evento: Evento): void {
+    this.eventService.reactivar(evento.id).subscribe(() => this.cargar());
+  }
+
   badgeEstado(estado: Evento['estado']): { texto: string; tono: TonoBadge } {
     switch (estado) {
       case 'programado':
@@ -91,6 +95,8 @@ export default class EventosComponent implements OnInit {
         return { texto: 'En curso', tono: 'dorado' };
       case 'finalizado':
         return { texto: 'Finalizado', tono: 'ok' };
+      default:
+        return { texto: '—', tono: 'neutro' };
     }
   }
 

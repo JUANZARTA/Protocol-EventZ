@@ -41,6 +41,14 @@
       >
         Finalizar
       </button>
+
+      <button
+        *ngIf="puedeCrear && evento.estado === 'finalizado'"
+        (click)="reactivar(evento)"
+        class="flex-1 rounded-lg border border-gold-400/40 py-2 text-xs font-medium text-gold-300"
+      >
+        Reactivar
+      </button>
     </div>
   </div>
 </div>
