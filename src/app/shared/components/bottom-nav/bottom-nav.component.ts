@@ -9,7 +9,7 @@ import { ItemNav, NAV_POR_ROL } from '../../nav-items';
   standalone: true,
   imports: [CommonModule, RouterLink, RouterLinkActive],
   template: `
-    <nav class="sticky bottom-0 z-10 flex border-t border-plata-200 bg-white/95 backdrop-blur md:hidden">
+    <nav class="fixed inset-x-0 bottom-0 z-20 flex border-t border-plata-200 bg-white/95 backdrop-blur md:hidden">
       <a
         *ngFor="let item of items"
         [routerLink]="item.ruta"
